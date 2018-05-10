@@ -1,0 +1,254 @@
+#!/bin/bash
+#
+
+POSSIXLY_CORRECT=yes
+
+#
+#/*
+# * autor: Robert Durovic
+# * nazov: IOS projekt 1
+# * datum: 3/2017
+# *
+# */
+#
+
+####################################################
+######                 FLAGS                   #####
+####################################################
+while getopts "i:n" opt; do
+  case $opt in
+  n) noption=1
+    ;;
+  i) ioption=${OPTARG}
+    ;;
+  ?) echo "$0: Bol zadany neplatny prepinac" >&2
+	exit 1
+    ;;
+  esac
+done
+
+shift $(($OPTIND - 1))
+
+####################################################
+#####                  NFLAG                   #####
+####################################################
+if [ -t $0 ];
+then
+  $maxCols=79
+else
+  maxCols=$(tput cols)
+fi
+
+####################################################
+#####           DIRECTORIES & FILES            #####
+####################################################
+DIR="$*"
+
+###  test zlozky ###
+if [ $# -gt 0 ]; then
+    if [ -d "${DIR}" ] ; then
+    echo "Root directory: $DIR";
+
+    else
+      if [ -f "${DIR}" ]; then
+        echo "$0: ${DIR} is a file";
+	exit 1
+      else
+        echo "$0: ${DIR} is not valid" >&2;	
+        exit 1
+      fi
+    fi
+else
+  DIR="."
+  echo "Root directory: ${DIR}";
+fi
+
+###  NUM OF DIR ###
+if [ $ioption ];
+then
+  if [ -d "${ioption}" ]; 
+  then
+     find ${DIR} -type d | egrep $ioption ­v | wc -l | xargs echo "Directories:"
+  else
+     find ${DIR} -type d | wc -l | xargs echo "Directories:"
+  fi
+else
+  find ${DIR} -type d | wc -l | xargs echo "Directories:"
+fi
+
+###  NUM OF FILES ###
+if [ $ioption ];
+then
+  find ${DIR} -type f | egrep $ioption -v | wc -l | xargs echo "All files:"
+else 
+  find ${DIR} -type f | wc -l | xargs echo "All files:"
+fi
+
+####################################################
+#####       FILE size histogram - FSHIST       #####
+####################################################
+echo "File size histogram:"
+
+### PRINT SIZE ###
+myLoop()
+{
+if [ $max = 0 ]
+then
+  printf "\n"
+else
+  for i in `seq 1 $max`
+   do
+     printf "#"
+   done
+  printf "\n"
+fi
+}
+
+#################      <100 B      #################
+if [ $ioption ];
+then
+  file_num=$(find ${DIR} -type f -size -100c | egrep $ioption -v | wc -l)
+  max=$file_num
+else
+  file_num=$(find ${DIR} -type f -size -100c | wc -l)
+  max=$file_num 
+fi
+
+printf "  <100 B  : "
+myLoop max
+
+#################      <1 KiB      #################
+if [ $ioption ];
+then
+  file_num=$(find ${DIR} -type f -size +99c -a -size -1024c | egrep $ioption -v | wc -l)
+  max=$file_num
+else
+  file_num=$(find ${DIR} -type f -size +99c -a -size -1024c | wc -l)
+  max=$file_num
+fi
+
+printf "  <1 KiB  : "
+myLoop max
+
+#################      <10 KiB     #################
+if [ $ioption ];
+then
+  file_num=$(find ${DIR} -type f -size +1023c -a -size -10240 | egrep $ioption -v | wc -l)
+  max=$file_num
+else
+  file_num=$(find ${DIR} -type f -size +1023c -a -size -10240c | wc -l)
+  max=$file_num
+fi
+
+printf "  <10 KiB : "
+myLoop max
+
+#################      <100 KiB    #################
+if [ $ioption ];
+then
+  file_num=$(find ${DIR} -type f -size +10239c -a -size -102400c | egrep $ioption -v | wc -l)
+  max=$file_num
+else
+  file_num=$(find ${DIR} -type f -size +10239c -a -size -102400c | wc -l)
+  max=$file_num
+fi
+
+printf "  <100 KiB: "
+myLoop max
+
+#################      <1 MiB      #################
+if [ $ioption ];
+then
+  file_num=$(find ${DIR} -type f -size +102399c -a -size -1048576c | egrep $ioption -v | wc -l)
+  max=$file_num
+else
+  file_num=$(find ${DIR} -type f -size +102399c -a -size -1048576c | wc -l)
+  max=$file_num
+fi
+
+printf "  <1 MiB  : "
+myLoop max
+	
+#################      <10 MiB     #################
+if [ $ioption ];
+then
+  file_num=$(find ${DIR} -type f -size +1048575c -a -size -10485760c | egrep $ioption -v | wc -l)
+  max=$file_num
+else
+  file_num=$(find ${DIR} -type f -size +1048575c -a -size -10485760c | wc -l)
+  max=$file_num
+fi
+
+printf "  <10 MiB : "
+myLoop max
+
+#################    <100 MiB      #################
+if [ $ioption ];
+then 
+  file_num=$(find ${DIR} -type f -size +10485759c -a -size -104857600c | egrep $ioption -v | wc -l)
+  max=$file_num
+else
+  file_num=$(find ${DIR} -type f -size +10485759c -a -size -104857600c | wc -l)
+  max=$file_num
+fi
+
+printf "  <100 MiB: "
+myLoop max
+
+#################     <1 GiB       #################
+if [ $ioption ];
+then
+  file_num=$(find ${DIR} -type f -size +104857599c -a -size -10737418240c | egrep $ioption -v | wc -l)
+  max=$file_num
+else
+  file_num=$(find ${DIR} -type f -size +104857599c -a -size -10737418240c | wc -l)
+  max=$file_num
+fi
+
+printf "  <1 GiB  : "
+myLoop max
+
+################      >=1 GiB      #################
+if [ $ioption ];
+then
+  file_num=$(find ${DIR} -type f -size +10737418239c | egrep $ioption -v | wc -l)
+  max=$file_num
+else
+  file_num=$(find ${DIR} -type f -size +10737418239c | wc -l)
+  max=$file_num
+fi
+
+printf "  >=1 GiB : "
+myLoop max
+
+####################################################
+#####       FILE type histogram -  FTHIST      #####
+####################################################
+echo "File type histogram:"
+
+if [ $ioption ];
+then
+  sec=$(find ${DIR} -type f | egrep $ioption -v | while read dir; do file -b "$dir"; done | sort | uniq -c | sort -nr | head -n 10 | while read num name; do echo "$num $name"; done | tr "\n" ";")
+else
+  sec=$(find ${DIR} -type f -exec file -b {} + | sort | uniq -c | sort -nr | head -n 10 | while read num name; do echo "$num $name"; done | tr "\n" ";")
+fi
+
+### FILE TYPE ###
+IFS=";" read -ra newSec <<< "$sec"
+for i in "${newSec[@]}"; 
+do
+  if (( "${#i}" > 42 ))
+  then
+    printf " $i" | sed 's/[0-9]\+//' | cut -c -42 | tr "\n" "\0"
+    printf " $i" | awk '{ printf "...: "}{ p = 0; do { printf "#"; p++} while ( p < $1 )}{ printf "\n"}' | sed 's/[0-9]\+//' | sed 's/[^@]/\0/g'
+  else
+    numSpace=$(printf "$i" | sed 's/[0-9]\+//' | wc -c)
+    printf " $i" | sed 's/[0-9]\+//'
+     while [ $numSpace -lt 44 ];
+        do
+       	  printf " "
+	  let numSpace+=1
+        done
+    printf " $i" | awk '{ printf ": "}{ p = 0; do { printf "#"; p++} while ( p < $1 ) }{ printf "\n"}' | sed 's/[0-9]\+//'
+  fi
+done
