@@ -1,0 +1,57 @@
+body {
+	background-color: #FFF;
+	color: #000;
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+}
+
+img {
+	display: none;
+}
+
+nav {
+	display: none;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+aside {
+	display: none;
+}
+
+button {
+	display: none !important;
+}
+
+footer {
+	border-top: 1px solid #000;
+	padding-top: 5px;
+	text-align: center;
+}
+
+footer p:first-child {
+	display: none;
+}
+
+article {
+	text-align: justify;
+}
+
+table {
+	margin-bottom: 20px;
+}
+
+table th, td {
+	padding-right: 15px;
+}
+
+.show {
+	display: block !important;
+}
+
+form, input, textarea {
+	display: none !important;
+}

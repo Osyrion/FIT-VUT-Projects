@@ -1,0 +1,60 @@
+\documentclass[a4paper,11pt, titlepage]{article}
+
+\usepackage[left=20mm, text={170mm, 240mm}, top=30mm]{geometry}
+\usepackage[czech]{babel}
+\usepackage[IL2]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage{url}
+
+\usepackage{url}
+\newcommand\myuv[1]{\quotedblbase #1\textquotedblleft}
+\DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}}
+
+\begin{document}
+
+\begin{titlepage}
+
+\begin{center}
+    {\Huge\textsc{Vysoké učení technické v~Brně}}\\
+        \medskip
+    {\huge\textsc{Fakulta informačních technologií}}\\
+    \vspace{\stretch{0.382}}
+    {\LARGE Typografie a~publikování\,--\,4.\,projekt}\\
+        \medskip
+    {\huge Bibliografické citace}\\
+    \vspace{\stretch{0.618}}
+\end{center}
+
+{\LARGE \today \hfill
+Róbert Ďurovič}
+
+\end{titlepage}
+
+\section{Bezpečnosť}
+Azda každý pozná bežné bezpečnostné riziká spojené s~používaním počítača. Klasické víry, červy či malvéry však ani zďaleka nie sú jedinou hrozbou pre užívateľov a~ich dáta. Útočníci čoraz častejšie začínajú využívať útoky \emph{XSS}. Napomáha tomu nielen nízke povedomie o~IT bezpečnosti samotných užívateľov, ktorý sa až slepo spoliehajú na antivírový program, ale aj trestuhodnej laxnosti vývojárov webových aplikácii. Podľa štatistík Symantecu, až 84\% všetkých webov je zraniteľných voči \emph{XSS} útoku \cite{Secpoint:XSS}. Ide predovšetkým o~chaty, fóra, blogy alebo rôzne sociálne siete.
+
+\section{Čo je XSS?}
+\emph{XSS} alebo \emph{Cross-Site Scripting} je druh útoku, ktorý využíva zraniteľnosť webstránky alebo prehliadača. Typicky, vložením kódu, ktorý pozmení správanie webovej aplikácie \cite{Excess:XSS}. Na rozdiel od iných útokov, napr. \emph{SQL injection}, sa \emph{XSS} nezameriava iba na jednu techniku prevedenia, ale má omnoho širší záber. \emph{XSS} totiž nie je obmedzené iba na vkladanie kombinácie kódu HTML a~JavaScriptu, ale útočník môže využiť prakticky všetko, čo prehliadač podporuje (Flash, VBScript či Javu apod) \cite{Zbornik:Bezpecnost_webovych_informacnych_systemov}.
+
+\section{Druhy XSS útokov}
+Podľa spôsobu zneužitia chýb prehliadača možno \emph{XSS} útoky rozdeliť do troch skupín: \emph{perzistívny}, \emph{neperzistívny} a~\emph{útok s využitím DOM (Document Object Model)} \cite{OWASP:Types_of_XSS}.
+
+Zrejme najčastejším využívaným spôsobom útoku je tzv. \emph{perzistívny}. To znamená, že škodlivý kód je podstrčený útočníkom do webovej aplikácie a~čaká na zobrazenie užívateľovi, teda je statický \cite{Chorvat:Utoky_typu_Cross_Site_Scripting}. Tento kód sa potom spustí v~jeho prehliadači, avšak útok trvá iba do momentu, kým užívateľ prehliadač alebo reláciu nezavrie. Takýto škodlivý kód možno obvykle nájsť v~komentároch, diskusných fórách, inzerátoch apod.
+
+\emph{Neperzistívny}, dynamický útok sa líši od statického tým, že tento škodlivý kód sa na nenachádza priamo na webstránke, ale je útočníkom podvrhnutý užívateľovi v správe, emaile či iným spôsobom \cite{Olejar:Analyza_utoku}. Takýto kód môže meniť správanie vyhľadávača a~prinútiť prehliadač, aby podsunul užívateľovi napr. falošnú webstránku banky, určenú na phishing alebo vyvolá inú nežiadúcu akciu \cite{Fogie:XSS_Attacks}.
+
+Útok založený na \emph{manipulácii s DOM} je síce najmenej častý, avšak útok prevedený touto technikou dokáže meniť a~upravovať existujúce webstránky aj bez toho, aby bol napadnutý server, na ktorom sú uložené. Typicky je to možné vykonať cez už existujúci JavaScriptový kód, ktorý obsahuje zraniteľné miesta \cite{Kummel:XSS_v_praxi}. 
+
+\section{Ako sa brániť?}
+V~prvom rade by \emph{XSS} útokom mohli zamedziť samotní programátori webových aplikácii tým, že znemožnia podsúvanie škodlivých kódov užívateľom. Nie je však možné sa na to spoliehať, a~tak by mali byť užívatelia pri surfovaní na internete zodpovední a~maximálne obozretní. Vhodné je navštevovať iba dôveryhodné webstránky, neotvárať nevyžiadanú poštu, kontrolovať či web, na ktorom zadávame citlivé údaje je tým skutočným webom a~nie podvrhnutou šablónou. Na slabo zabezpečených weboch je vhodné vypnúť JavaScript alebo používať k tomuto účelu aplikáciu NoScript priamo v prehliadači \cite{IST:Automated_XSS_removal}. Riziká \emph{XSS} útokov môžu byť rôzne. Od neškodného spamovania, podsunutia malvéru, až po krádež citlivých údajov či identity \cite{CS:Malicious_XSS}.
+
+\newpage
+
+\bibliographystyle{czechiso}
+
+\def\refname{Použitá literatúra}
+
+\bibliography{bibliografia}
+
+\end{document}
