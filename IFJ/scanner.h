@@ -1,0 +1,43 @@
+// scanner.h
+// IFJ_projekt_2017
+// Drahomir Dlabaja (xdlaba02), 
+
+#ifndef SCANNER_H
+#define SCANNER_H
+
+#include "token.h"
+
+typedef enum {
+	STATE_INIT,
+	STATE_WORD,
+	STATE_NUM,
+	STATE_DOUBLE,
+	STATE_EXPONENT1,
+	STATE_EXPONENT2,
+	STATE_EXPONENT3,
+	STATE_EXCLAM,
+	STATE_STRING,
+	STATE_GREATER,
+	STATE_LESS,
+	STATE_SLASH,
+	STATE_BLOCK_C,
+	STATE_LINE_C,
+	STATE_ESCAPE1,
+	STATE_ESCAPE2,
+	STATE_ESCAPE3,
+	STATE_END_BLK_C,
+	STATE_RETURN_OPERATOR,
+	STATE_RETURN_EOL,
+	STATE_RETURN_WORD,
+	STATE_RETURN_INTEGER,
+	STATE_RETURN_DOUBLE,
+	STATE_RETURN_STRING,
+	STATE_ERROR,
+	STATE_ERROR_FREE
+} states;
+
+int is_keyword(char *str);
+void put_token(token **t);
+token *get_token();
+
+#endif
