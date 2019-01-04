@@ -46,7 +46,7 @@ SQL dotazy a příkazy ukazující transakční zpracování, vč. jejich popisu
 
 Tip: pro ladění PL/SQL kódu v uložených procedurách či databázových triggerech můžete použít proceduru DBMS_OUTPUT.put_line(...) pro výstup na terminál klienta.
 
-### Hodocení řešení projektu
+### Hodnocení řešení projektu
 Za řešení splňující všechny požadavky definované v popisu částí projektu a upřesňujících požadavcích zadání projektu lze získat celkem 29 bodů. Za nadprůměrný výsledek obsahující další funkcionalitu či prvky nepožadované explicitně v zadání projektu lze získat dalších 5 bodů, zde je ponechán prostor pro iniciativu dvojice.
 
 Celkově lze dosáhnout nejvýše 29 až 34 bodů. Za jednotlivé části řešení je následující počet bodů:
