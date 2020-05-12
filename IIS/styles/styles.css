@@ -1,0 +1,26 @@
+/*CSS */
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(rgba(185, 193, 214, 0.9), rgba(185, 193, 214, 0.9)), url("../pic/logo/bgd.jpg") #FFF; 
+    background-size: cover;/*
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;*/
+    min-height: 100%;
+    margin: 0;
+    padding: 0 0 100px 0;
+    position: relative;
+}
+
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
