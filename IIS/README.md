@@ -56,7 +56,7 @@ Informační systém pro jídelny a rozvoz jídla
 	<li>Jidlo/Objednavka.php - Pokud je uživatel přihlášený očekává v url parametr obj s id objednávky, kterou chce vidět. Pokud není přihlášený zobrazí se textové pole do, kterého může vložit kód objednávky, kterou chce sledovat</li>
 </ul>
 <h3>Databáze</h3>
-<img alt="schéma databáze" src="Doc/iis_db.png">
+<img alt="schéma databáze" src="iis_db.png">
 Zde vložte grafické schéma relační databáze (tabulek v databázi).
 
 <h2>Instalace</h2>
